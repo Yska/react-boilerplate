@@ -1,0 +1,21 @@
+{
+  "APP": "mgt",
+  "STAGE": "development",
+  "NODE_ENV": "development",
+  "PORT": 3000,
+  "DOMAIN": "example.com",
+  "SMTP_HOST": "smtp.gmail.com",
+  "SMTP_PORT": 465,
+  "SMTP_USER": "reactboilerplatovich@gmail.com",
+  "SMTP_PASSWORD": "123113qwE",
+  "BASE_URL": "http://localhost:3000",
+  "MONGO_URL": "mongodb://localhost:27017/mgt",
+  "REDIS_URL": "redis://localhost:6379/0",
+  "SESSION_SECRET": "0qspyfO2Csa1L5PpBFroawiSy9nXRVL8",
+  "ADMINS": ["pturchik@yandex.ru", "pturchik@gmail.com",
+    "maestro.sc@yandex.ru"
+  ],
+  "MIGRATION_SECRET": "KsWuvOpyN6XYF5vI33FfG6yDvIkDDI6S",
+  "COPY_TO_ENV": ["NODE_ENV", "PORT"],
+  "PUBLIC": ["APP", "STAGE", "NODE_ENV", "BASE_URL", "PUBLIC"]
+}

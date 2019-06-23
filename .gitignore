@@ -1,0 +1,24 @@
+# OS X
+.DS_Store
+
+# Deps
+/node_modules/
+/bower_components/
+
+# Backup files
+*~
+
+# Public
+public/css
+public/js
+public/sprite.svg
+
+# App
+/build
+
+*.swp
+*.log
+.idea
+.history
+.vscode
+npm-*

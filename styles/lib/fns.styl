@@ -1,0 +1,10 @@
+$ui-getSvgIcon(color, icon)
+  // Fix for Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=658949)
+  color = replace('#', '%23', '' + color)
+  icon = replace('#', '%23', '' + icon)
+  icon = replace('<', '%3C', '' + icon)
+  icon = replace('>', '%3E', '' + icon)
+  svg = 'data:image/svg+xml;utf8,' + icon
+  svg = s(svg, unquote(color))
+  svg = "url('" + svg + "')"
+  return unquote(svg)

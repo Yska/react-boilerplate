@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600&display=swap&subset=cyrillic')
+
+*
+  padding 0
+  margin 0
+  &, &:before, &:after
+    box-sizing border-box
+
+html
+  -webkit-tap-highlight-color transparent
+  color: $colors.main
+  font-size font()
+  line-height line()
+  letter-spacing 0.5px
+
+html, button, input, textarea, select
+  font-family $fontNormal
+
+a
+button
+input
+label
+select
+textarea
+  touch-action manipulation
+
+label
+  user-select none

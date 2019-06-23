@@ -1,0 +1,53 @@
+from(num)
+  condition = 'screen and (min-width: %s)' % num
+  @media condition
+    {block}
+
+to(num)
+  condition = 'screen and (max-width: %s)' % ((num - 1))
+  @media condition
+    {block}
+
+between(num1, num2)
+  condition = 'screen and (min-width: %s) and (max-width: %s)' % (num1 (num2 - 1))
+  @media condition
+    {block}
+
+mobile()
+  +to($mobile)
+    {block}
+
+tablet()
+  +to($tablet)
+    {block}
+
+desktop()
+  +from($tablet)
+    {block}
+
+light()
+  font-weight 300
+
+normal()
+  font-weight 400
+
+medium()
+  font-weight 500
+
+bold()
+  font-weight 700
+
+bleed(left = gutter(), right = left)
+  padding-left left
+  padding-right right
+  margin-left (- left)
+  margin-right (- right)
+
+// For smoother sub-pixel animation on GPU and to prevent pixel-jumping
+// http://stackoverflow.com/a/22908444
+// NOTE: If you have another transform, this mixin MUST be applied last
+transform2D(args...)
+  // support browsers which don't have transform3d support
+  transform args
+  // fix animation rounding issues by force applying 3d transformation
+  transform translateZ(0) args

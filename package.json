@@ -1,0 +1,92 @@
+{
+  "name": "mgt",
+  "version": "1.0.0",
+  "private": true,
+  "sideEffects": [
+    "*.css",
+    "*.styl",
+    "./helpers/initOrm",
+    "*.json"
+  ],
+  "scripts": {
+    "server": "concurrently -s first -k -n 'S,B' -c black.bgWhite,cyan.bgBlue \"npm run server:run\" \"npm run server:build\" \"yarn gulp\"",
+    "server:build": "WEBPACK_DEV=1 webpack --watch --config webpack.server.js",
+    "server:run": "just-wait -t 1000 --pattern \"./build/server.dev.js\" && nodemon \"./build/server.dev.js\" -r source-map-support/register --watch \"./build/server.dev.js\"",
+    "build": "npm run clear && gulp build && npm run build-server && npm run build-web",
+    "clear": "rm -rf ./build",
+    "gulp": "gulp",
+    "build-server": "webpack --config webpack.server.js",
+    "start-production": "NODE_ENV=production node -r source-map-support/register build/server.js",
+    "build-web": "webpack --config webpack.web.js",
+    "web": "webpack-serve webpack.web.js --log-level silent --port 3010 --host 0.0.0.0 --dev-ware '{\"quiet\":true,\"publicPath\":\"/build/client/\",\"headers\":{\"Access-Control-Allow-Origin\":\"*\"}}' --hot-client '{\"host\":\"0.0.0.0\",\"logLevel\":\"silent\",\"port\":3011}'",
+    "web-verbose": "VERBOSE=1 npm run web",
+    "precommit": "lint-staged",
+    "gmp": "git checkout production && git pull origin production && git merge master && git push && git checkout master || (git checkout master && echo '>' && echo '> !!!!! FAILED !!!!! DO THE MERGE MANUALLY !!!!!!!!!!!' && echo '>' && exit 1)"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,jsx}": [
+        "eslint --fix",
+        "git add"
+      ]
+    },
+    "ignore": []
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.3",
+    "classnames": "^2.2.6",
+    "dm-sharedb-server": "8.0.0-alpha.2",
+    "moment": "^2.24.0",
+    "nconf": "^0.10.0",
+    "nodemailer": "^6.1.1",
+    "racer": "^0.9.3",
+    "racer-highway": "^8.1.0",
+    "racer-orm": "^1.0.0",
+    "react": "^16.8.3",
+    "react-dom": "npm:@hot-loader/react-dom",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-sharedb": "^8.0.0-alpha.24",
+    "sharedb": "^1.0.0-beta.8",
+    "sharedb-mongo": "http://github.com/dmapper/sharedb-mongo/tarball/aggregationSecondary",
+    "sharedb-redis-pubsub": "^1.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.4.4",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-flow-react-proptypes": "^25.0.0",
+    "babel-plugin-import": "^1.11.0",
+    "babel-plugin-react-pug-classnames": "^0.2.1",
+    "babel-plugin-transform-imports": "^1.5.1",
+    "babel-plugin-transform-react-pug": "^7.0.0",
+    "concurrently": "^4.1.0",
+    "del": "^4.1.1",
+    "dm-bundler": "0.6.0",
+    "eslint": "^5.14.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-pug": "^0.5.7",
+    "eslint-plugin-standard": "^4.0.0",
+    "gulp": "^4.0.2",
+    "gulp-svg-sprite": "^1.5.0",
+    "gulp-svgo": "^2.1.1",
+    "just-wait": "^1.0.11",
+    "lint-staged": "^8.1.5",
+    "nodemon": "^1.18.10",
+    "react-hot-loader": "*",
+    "source-map-support": "^0.5.10",
+    "standard": "^12.0.1",
+    "webpack": "^4.29.6",
+    "webpack-command": "^0.4.2",
+    "webpack-serve": "http://github.com/dmapper/webpack-serve/tarball/master"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}

@@ -1,0 +1,57 @@
+_getHashValue(hashMap, key, defaultKey, type)
+  // Workaround global built-in function s()
+  // http://stylus-lang.com/docs/bifs.html#sfmt-
+  key = 's' if key is s
+  key = '' + key
+  if key in hashMap
+    return hashMap[key]
+  else
+    msg = 'There is no "%s()" for "%s". Using default %s ("%s").'
+    defaultKey = '' + defaultKey
+    warn('' + s(msg, type, key, type, defaultKey))
+    return hashMap[defaultKey]
+
+$gutters = {
+  xs :  4px
+  s  :  8px
+  m  : 16px
+  l  : 24px
+  xl : 32px
+  xxl: 48px
+}
+
+gutter(key = m)
+  _getHashValue($gutters, key, m, 'gutter')
+
+$fontSizes = {
+  xs : 12px
+  s  : 14px
+  m  : 16px
+  l  : 20px
+  xl : 24px
+  xxl: 30px
+}
+
+font(key = m)
+  _getHashValue($fontSizes, key, m, 'font')
+
+$lines = {
+  no : 1
+  xs : 1
+  s  : 1.25
+  m  : 1.5
+  l  : 2
+  xl : 3
+  xxl: 4
+}
+
+line(key = m)
+  _getHashValue($lines, key, m, 'line')
+
+$mobile ?= 480px
+$tablet ?= 768px
+$desktop ?= 1024px
+$wide ?= 1300px
+
+$fontNormal = "Source Sans Pro", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif
+$fontHeading = "Source Sans Pro", "Helvetica", "Roboto", "Arial", sans-serif
